@@ -1,68 +1,47 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This code dynamically builds a form from a JSON array.
 
-## Available Scripts
+Setting Up
+--------
+- Run `npm start` and open http://localhost:3000/.
 
-In the project directory, you can run:
+Features
+--------
+<h5>Dynamic Forms</h5>
 
-### `npm start`
+- The constant in `formFields.js` is used to dynamically generate a form. (See (Future Plans)[https://github.com/at4260/dynamic-forms/blob/master/README.md#future-plans] for how to properly handle the JSON array.)
+- Loop through the JSON array to display the fields.
+- If the field has a conditional key, check the state to see if `conditional.name` has been inputted. If so, take the value inputted and convert the string into a date object. Evaluate against `conditional.show_if` to determine if the field needs to be displayed.
+- Submit the form and see the JSON object of the entered field values.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<h5>User Experience</h5>
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- Keyboard shortcuts to speed through filling out the form
+- HTML constraint validation built-in to check for required fields and emails are in the right format
 
-### `npm test`
+Future Plans
+--------
+<h5>Tests</h5>
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Testing different JSON arrays in creating a dynamic form
+- Testing the rendering of the conditional forms
+- Testing the logic around string to date object and evaluating `show_if` function
+- Testing the output as a JSON object
+- Checks that JSON object is saved to database
 
-### `npm run build`
+<h5>JSON Array Input</h5>
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Determine how to handle the JSON array. Possible considerations:
+  - A form for the team to enter in a JSON array. Array would get saved in the database with a name and tied to an organization ID. This could also be tied to a route for the customer to access directly. Form would be generated after selecting for name and organization ID.
+  - If only a lightweight solution is needed, remove the backend/database. A form for the team to enter in a JSON array. Upon submitting, dynamically generates the form.
+- Ensure that the JSON array is validated. Example: each array should be validated that there's a `tag`, `name`, `type`, and `human_label`.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+<h5>JSON Object Output</h5>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Determine how to handle the JSON object that's outputted. In the current solution, I have chosen to simply display the JSON object. Possible considerations:
+  - JSON object is saved to the database tied to an user ID and org ID.
 
-### `npm run eject`
+<h5>User Experience</h5>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+- HTML placeholders can be added to the JSON array to provide examples to users. Another option would be to have an object to cross-refernce the JSON array `name` to a placeholder option. Example: the `name` of `email` is always tied to the placeholder `jane@example.com`.
+- UX should flow from other forms being used to create a seamless experience. (I used the Sparrow landing page as an example for some of those design decisions.)
+- Context needs to be provided for what the form is for. Perhaps an organization name and form type at the top.
